@@ -1,46 +1,54 @@
+import tdamr_api as tdp
 import sqlite3
-#connection = sqlite3.connect("TDC.db")
-#cursor = connection.cursor()
-'''
-cursor.execute("CREATE TABLE keys (consumerkey TEXT, accesstoken TEXT, refreshtoken TEXT)")
-
-cursor.execute(f"INSERT INTO keys VALUES ('{consumer_key}', '{access_token}', '{refresh_token}')")
-
-cursor.commit()
+import json
+import time
 
 
-'''
-
-'''
-rows = (cursor.execute("SELECT accesstoken, consumerkey FROM keys").fetchall())[0][0]
-print(rows)
-'''
+tdc = tdp.TDclient()
 
 
-class KeyConnection:
+data = tdc.get_quotes(details=[['F', 'GOOG', 'CMG', 'NVDA', 'HD', 'SPY'], False])
 
-    def __init__(self):
-        self.connection = sqlite3.connect("TDC.db")
-        self.cursor = self.connection.cursor()
 
-    def get_at(self):
-        at = (self.cursor.execute("SELECT accesstoken FROM keys").fetchall())[0][0]
-        return at
+#Options_data = tdc.option_chain(details=['F', False])
+#Options_data = tdc.sort_data_into_data_frames(Options_data)
 
-    def get_ck(self):
-        ck = (self.cursor.execute("SELECT consumerkey FROM keys").fetchall())[0][0]
-        return ck
 
-    def get_rt(self):
-        rt = (self.cursor.execute("SELECT refreshtoken FROM keys").fetchall())[0][0]
-        return rt
 
-    def replace_at(self, new_token):
+# check spread, bid, ask
+# track avg spread
 
-        (self.cursor.execute(f"UPDATE keys SET accesstoken = '{new_token}'"))
-        self.connection.commit()
+# condition to remove order
+# if ask is closer to our position than 50% of spread
 
-    def replace_rt(self, new_token):
 
-        (self.cursor.execute(f"UPDATE keys SET refreshtoken = '{new_token}'"))
-        self.connection.commit()
+# place bid order
+# if not filled by the next loop cycle
+# move it up.
+# repeat
+
+# place order at ask.
+# if not filled by the next loop cycle
+# move it down.
+# repeat
+
+
+
+# monitor spread process is started
+
+
+
+
+
+
+
+class position:
+    def __init__(self, shares, ticker):
+        self.shares = shares
+        self.ticker = ticker
+
+
+print(data)
+
+
+
